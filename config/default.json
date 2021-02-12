@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://mirias:michelita234@mern.ru26x.mongodb.net/youtubeclon?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
+}
