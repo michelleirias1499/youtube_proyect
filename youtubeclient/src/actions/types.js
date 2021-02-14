@@ -9,7 +9,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_USER = 'GET_USER';
 export const USER_ERROR = 'USER_ERROR';
-export const GET_COMMENT ='GET_COMMENT';
-export const COMMENT_ERROR = 'COMMENT_ERROR';
-export const ADD_COMMENT ='ADD_COMMENT';
+export const GET_VIDEO ='GET_VIDEO';
+export const VIDEO_ERROR ="VIDEO_ERROR";
+export const ADD_VIDEO="ADD_VIDEO";
 

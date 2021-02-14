@@ -20,10 +20,6 @@ const VideoDetail = ({video}) => {
                 </h4>
                 <p>{video.snippet.description}</p>
             </div>
-            <div className="ui comments">
-                <h3 className="ui dividing header">Comments</h3>
-            </div>
-            <CommentItem video={video.id.videoId}/>
         </div>
 
     );

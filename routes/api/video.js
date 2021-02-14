@@ -3,29 +3,21 @@ const express = require('express');
 const router = express.Router();
 const {check, validationResult} = require('express-validator');
 const auth = require('../../middleware/auth');
-const Comment = require('../../models/comment');
 const User = require('../../models/user');
+const Video = require('../../models/video');
 
-router.post('/', [auth, [
-    check('text', 'Text is required').not().isEmpty()
-]],
+router.post('/', [
+],
 async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array()});
-    }
-    
     try {
-        const user = await User.findById(req.user.id).select('-password');
-        const newPost = new Comment({
-        text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
+        console.log('este es el req.body', req.body);
+        const newVideo = new Video({
+            IdVideo: req.body.video
         });
 
-        const post = await newPost.save();
-        res.json(post);
+        const video = await newVideo.save();
+        console.log('este es el await', video);
+        res.json(video);
 
     } catch (error) {
         console.error(error.message);
@@ -35,25 +27,25 @@ async (req, res) => {
 
 router.get('/', auth, async(req,res) => {
     try {
-        const posts = await Comment.find().sort({date: -1});
-        res.json(posts);
+        const videos = await Video.find();
+        res.json(videos);
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
 });
 
-router.get('/:id', auth, async(req,res) => {
+router.get('/:id', async(req,res) => {
     try {
-        const post = await Comment.findById(req.params.id);
-        if(!post){
-            return res.status(404).json({msg: 'Comment not found'});
+        const videos = await Video.findById(req.params.id);
+        if(!videos){
+            return res.status(404).json({msg: 'Video not found'});
         }
-        res.json(post);
+        res.json(videos);
     } catch (error) {
         console.error(error.message);
         if(error.kind === 'ObjectId'){
-            return res.status(404).json({msg: 'Comment not found'});
+            return res.status(404).json({msg: 'video not found'});
         }
         res.status(500).send('Server Error');
     }
@@ -61,10 +53,10 @@ router.get('/:id', auth, async(req,res) => {
 
 router.delete('/:id', auth, async(req,res) => {
     try {
-        const post = await Comment.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
 
         if(!post){
-            return res.status(404).json({msg: 'Comment not found'});
+            return res.status(404).json({msg: 'Post not found'});
         }
 
         //Check on user
@@ -72,10 +64,10 @@ router.delete('/:id', auth, async(req,res) => {
             return res.status(401).json({msg: 'User not authorized'});
         }
         await post.remove();
-        res.json({msg: 'Comment removed'});
+        res.json({msg: 'Post removed'});
     } catch (error) {
         if(error.kind === 'ObjectId'){
-            return res.status(404).json({msg: 'Comment not found'});
+            return res.status(404).json({msg: 'Post not found'});
         }
         console.error(error.message);
         res.status(500).send('Server Error');
@@ -84,10 +76,10 @@ router.delete('/:id', auth, async(req,res) => {
 
 router.put('/like/:id', auth, async(req,res) => {
     try {
-        const post = await Comment.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
         //Check if the post has already been liked
         if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0){
-            return res.status(400).json({msg: 'Comment already like'});
+            return res.status(400).json({msg: 'Post already like'});
         }
 
         post.likes.unshift({user: req.user.id});
@@ -103,10 +95,10 @@ router.put('/like/:id', auth, async(req,res) => {
 
 router.put('/unlike/:id', auth, async(req,res) => {
     try {
-        const post = await Comment.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
         //Check if the post has already been liked
         if(post.likes.filter(like => like.user.toString() === req.user.id).length === 0){
-            return res.status(400).json({msg: 'Comment has not yet been liked'});
+            return res.status(400).json({msg: 'Post has not yet been liked'});
         }
 
         //Get remove index
@@ -134,7 +126,7 @@ async (req, res) => {
 
     try {
         const user = await User.findById(req.user.id).select('-password');
-        const post = await Comment.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
         const newComment = {
         text: req.body.text,
         name: user.name,
@@ -154,7 +146,7 @@ async (req, res) => {
 
 router.delete('/comment/:id/:comment_id', auth, async (req,res) => {
     try {
-        const post = await Comment.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
 
         //Pull out comment
 

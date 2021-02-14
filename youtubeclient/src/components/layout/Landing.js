@@ -6,12 +6,14 @@ import SearchBar from './video/SearchBar';
 import youtube from '../apis/youtube';
 import VideoList from './video/VideoList';
 import VideoDetail from './video/VideoDetail';
+import CommentItem from './comment/CommentItem';
 
 class Landing extends React.Component  {
     state = {videos:[], selectedVideo: null};
 
     componentDidMount(){
-        this.onTermSubmit('random');
+        this.onTermSubmit('cute kitties');
+        console.log("props", this.props);
     }
 
     onTermSubmit = async (term) =>{

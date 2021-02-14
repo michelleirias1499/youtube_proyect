@@ -24,14 +24,15 @@ export const Navbar = ({auth: {isAuthenticated, loading}, logout}) => {
         <ul>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
+            <li><Link to="/ReproductionPage">Videos</Link></li>
         </ul>
         
     )
 
     return (
         <nav className="navbar bg-dark">
-            <h1>
-                <Link to="/"><i className="fab fa-youtube"></i>Michi's Youtube</Link>
+            <h1 onClick="location.reload()">
+                <Link to="/landingPrincipal"><i className="fab fa-youtube"></i>Michi's Youtube</Link>
             </h1>
             {
                 !loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)
