@@ -37,39 +37,19 @@ router.get('/', auth, async(req,res) => {
 
 router.get('/:id', async(req,res) => {
     try {
-        const videos = await Video.findById(req.params.id);
+        var id = req.params.id
+        const videos = await Video.find({IdVideo: id});
+        
         if(!videos){
             return res.status(404).json({msg: 'Video not found'});
         }
         res.json(videos);
+
     } catch (error) {
         console.error(error.message);
-        if(error.kind === 'ObjectId'){
+        if(error.kind === 'IdVideo'){
             return res.status(404).json({msg: 'video not found'});
         }
-        res.status(500).send('Server Error');
-    }
-});
-
-router.delete('/:id', auth, async(req,res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-
-        if(!post){
-            return res.status(404).json({msg: 'Post not found'});
-        }
-
-        //Check on user
-        if(post.user.toString() !== req.user.id){
-            return res.status(401).json({msg: 'User not authorized'});
-        }
-        await post.remove();
-        res.json({msg: 'Post removed'});
-    } catch (error) {
-        if(error.kind === 'ObjectId'){
-            return res.status(404).json({msg: 'Post not found'});
-        }
-        console.error(error.message);
         res.status(500).send('Server Error');
     }
 });
@@ -115,7 +95,7 @@ router.put('/unlike/:id', auth, async(req,res) => {
     }
 });
 
-router.post('/comment/:id', [auth, [
+router.post('/comment/:id',[auth,[
     check('text', 'Text is required').not().isEmpty()
 ]],
 async (req, res) => {
@@ -125,18 +105,19 @@ async (req, res) => {
     }
 
     try {
+        var id = req.params.id;
         const user = await User.findById(req.user.id).select('-password');
-        const post = await Post.findById(req.params.id);
+        const videos = await Video.find({IdVideo: id});
         const newComment = {
-        text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
+            text: req.body.text,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id
         };
-
-        post.comments.unshift(newComment);
-        await post.save();
-        res.json(post.comments);
+        
+        videos[0].comments.push(newComment);
+        await videos[0].save();
+        res.json(videos);
 
     } catch (error) {
         console.error(error.message);

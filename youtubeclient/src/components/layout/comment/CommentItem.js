@@ -3,17 +3,24 @@ import {connect} from 'react-redux';
 import {postvideo} from '../../../actions/video';
 import PropTypes from 'prop-types';
 import { stringify } from 'uuid';
+import {commentVideo} from '../../../actions/video';
 
-const CommentItem = ({postvideo, video}) => {
+const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
     console.log("test", video);
     return (
         <div>
-            <div className="comment"></div>
+            <div className="comment">
+                <div class="text">
+                    How artistic!
+                </div>
+            </div>
             <form className="ui reply form" onSubmit={e=> {
                 e.preventDefault();
-                setText('');
                 postvideo(video);
+                console.log("el id del video en bd",video);
+                commentVideo(video,{text});
+                setText('');
             }}>
                 <div className="field">
                     <textarea placeholder="Comment here" value={text} onChange={e=> setText(e.target.value)}></textarea>
@@ -27,6 +34,7 @@ const CommentItem = ({postvideo, video}) => {
 CommentItem.propTypes ={
     postvideo: PropTypes.func.isRequired,
     video: PropTypes.object.isRequired,
+    commentVideo: PropTypes.func.isRequired,
 }
 
-export default connect(null, {postvideo})(CommentItem);
+export default connect(null, {postvideo, commentVideo})(CommentItem);

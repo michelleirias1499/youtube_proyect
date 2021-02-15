@@ -12,4 +12,5 @@ export const USER_ERROR = 'USER_ERROR';
 export const GET_VIDEO ='GET_VIDEO';
 export const VIDEO_ERROR ="VIDEO_ERROR";
 export const ADD_VIDEO="ADD_VIDEO";
+export const ADD_COMMENT="ADD_COMMENT";
 

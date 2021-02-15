@@ -1,9 +1,15 @@
-import React,{Fragment} from 'react';
+import React,{Fragment, useEffect} from 'react';
 import CommentItem from '../comment/CommentItem';
 import Spinner from '../Spinner';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {getVideo} from '../../../actions/video';
 
 
-const VideoDetail = ({video}) => {
+const VideoDetail = ({video, getVideo, match}) => {
+    useEffect(() => {
+        //getVideo(match.params.id);
+    }, [getVideo])
     if(!video){
         return <Spinner />;
     }
@@ -25,8 +31,12 @@ const VideoDetail = ({video}) => {
             </div>
             <CommentItem video={video.id.videoId}/>
         </div>
-
+        
     );
 };
 
-export default VideoDetail;
+VideoDetail.propTypes = {
+    getVideo: PropTypes.func.isRequired
+}
+
+export default connect(null, {getVideo})(VideoDetail)

@@ -36,8 +36,8 @@ const App =() =>{
             <Switch>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/login" component={Login}/>
-              {/* <Route exact path="/ReproductionPage" component={Landing}/> */}
-              <Route path="/ReproductionPage(/:id)" component={Landing}    />
+              <Route exact path="/ReproductionPage" component={Landing}/>
+              {/* <Route path="/ReproductionPage(/:id)" component={Landing}    /> */}
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>   
             </Switch>
           </section>

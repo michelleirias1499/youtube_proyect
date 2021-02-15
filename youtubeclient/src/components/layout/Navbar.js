@@ -17,6 +17,7 @@ export const Navbar = ({auth: {isAuthenticated, loading}, logout}) => {
                     <span className="hide-sm"></span>Logout
                 </a>
             </li>
+            <li><Link to="/ReproductionPage">Videos</Link></li>
         </ul>
     );
 
