@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {postvideo} from '../../../actions/video';
 import PropTypes from 'prop-types';
@@ -49,18 +49,43 @@ import axios from 'axios';
 const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
     const [comments, setcommentsArray] = useState([]);
-    console.log("test", video);
-    // const getAllComments= async(videoId)=>{
-    //     const allcomments = await axios.get(`/api/video/${videoId}`);
-    //     const commentsArray = allcomments.data||[];
-    //     setcommentsArray(commentsArray);
-    //     console.log("estado", this.state.comments);
-    //     console.log("coments", comments);
-    // }
+    const [commentsRender, setcommentsRenders] = useState([]);    
+
+    console.log("test", video); 
+
+    useEffect(() => {
+        getAllComments(video)
+    }, [video])
+
+    useEffect(() => {
+        var mainCommentArray = comments[0] || []
+        var nextLevelComments = mainCommentArray.comments || []
+        var commentItems = []
+        nextLevelComments.map((commentInfo)=>{
+            let {avatar,text,name} = commentInfo 
+            console.log("datos del comment", avatar,text,name)
+            commentItems.push(
+                <div>
+                    <div>{avatar}</div>
+                    <div>{name}</div>
+                    <div>{text}</div>
+                </div>
+            );
+        })
+        setcommentsRenders(commentItems);
+        console.log("ESTA ES LA LISTA DEE COMMENTS", commentItems)
+    }, [comments])
+    
+    const getAllComments= async(videoId)=>{
+        const allcomments = await axios.get(`/api/video/${videoId}`);
+        const commentsArray = allcomments.data||[];
+        setcommentsArray(commentsArray);
+        console.log("coments", comments);
+    }
     return (
         <div>
             <div className="comment">
-                Hola
+                {commentsRender}
             </div>
             <form className="ui reply form" onSubmit={e=> {
                 e.preventDefault();
