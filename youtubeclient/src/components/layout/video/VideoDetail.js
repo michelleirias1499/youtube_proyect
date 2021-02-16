@@ -29,7 +29,7 @@ const VideoDetail = ({video, getVideo, match}) => {
             <div className="ui comments">
                 <h3 className="ui dividing header">Comments</h3>
             </div>
-            <CommentItem video={video.id.videoId}/>
+            <CommentItem video={video.id.videoId} />
         </div>
         
     );
