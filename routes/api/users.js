@@ -7,6 +7,7 @@ const express = require('express');
  const jwt = require('jsonwebtoken');
  const config = require('config');
  const auth = require('../../middleware/auth');
+ const Video = require('../../models/video');
 
  router.post('/', [
      check('name', 'Name is required').not().isEmpty(),
@@ -78,7 +79,25 @@ router.get('/me', auth, async(req, res) => {
     }
 });
 
+router.put('/like/:id', auth, async(req,res) => {
+    try {
+        id=req.params.id;
+        const videolike = await Video.find({IdVideo: id});
+        //Check if the post has already been liked
+        if(videolike.likes.filter(like => like.user.toString() === req.user.id).length > 0){
+            return res.status(400).json({msg: 'Post already like'});
+        }
 
+        post.likes.unshift();
+
+        await post.save();
+
+        res.json(post.likes);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports=router;
 

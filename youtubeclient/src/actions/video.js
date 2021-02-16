@@ -62,6 +62,22 @@ export const commentVideo = (video, formData) => async dispatch => {
             type: VIDEO_ERROR,
             payload: {msg: error.response.statusText, status: error.response.status}
         });
+        dispatch(setAlert('You must have an account to comment', 'danger'));
+    }
+};
+//add likes
+export const addlike = (video) => async dispatch => {
+    try {
+        const res = axios.put('/api/video/:id');
+        dispatch({
+            type: GET_VIDEO,
+            payload: res.data
+        });
+    } catch (error) {
+        dispatch({
+            type: VIDEO_ERROR,
+            payload: {msg: error.response.statusText, status: error.response.status}
+        });
     }
 }
 

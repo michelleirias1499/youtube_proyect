@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const UserSquema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,13 +21,9 @@ const UserSquema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    playlist: [
+    likes:[
         {
-            title: {
-                type: String
-            },
-
-            url: {
+            title:{
                 type: String
             }
         }
