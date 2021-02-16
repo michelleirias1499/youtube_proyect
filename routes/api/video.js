@@ -54,24 +54,6 @@ router.get('/:id', async(req,res) => {
     }
 });
 
-router.put('/like/:id', auth, async(req,res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-        //Check if the post has already been liked
-        if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0){
-            return res.status(400).json({msg: 'Post already like'});
-        }
-
-        post.likes.unshift({user: req.user.id});
-
-        await post.save();
-
-        res.json(post.likes);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Server Error');
-    }
-});
 
 router.put('/unlike/:id', auth, async(req,res) => {
     try {
@@ -118,6 +100,18 @@ async (req, res) => {
         videos[0].comments.push(newComment);
         await videos[0].save();
         res.json(videos);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+router.get('/comment/:id', async (req, res) => {
+    try {
+        var id = req.params.id;
+        const videos = await Video.find({IdVideo: id});
+        res.json(videos[0].comments);
 
     } catch (error) {
         console.error(error.message);
