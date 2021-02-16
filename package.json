@@ -7,7 +7,8 @@
     "start": "node server",
     "server": "nodemon server",
     "youtubeclient": "npm start --prefix youtubeclient",
-    "dev": "concurrently \"npm run server\" \"npm run youtubeclient\""
+    "dev": "concurrently \"npm run server\" \"npm run youtubeclient\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix youtubeclient && npm run build --prefix youtubeclient"
   },
   "author": "Michelle Irias",
   "license": "MIT",
