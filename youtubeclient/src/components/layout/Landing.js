@@ -12,8 +12,13 @@ class Landing extends React.Component  {
     state = {videos:[], selectedVideo: null};
 
     componentDidMount(){
-        this.onTermSubmit('cute kitties');
-        console.log("props", this.props);
+        const {video} = this.props.location.query || {}
+        if(video){
+            this.setState({selectedVideo: video});
+        }else{
+            this.onTermSubmit('cute kitties');
+        }
+        console.log("que trae props", this.props);
     }
 
     onTermSubmit = async (term) =>{

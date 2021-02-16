@@ -55,27 +55,46 @@ router.get('/:id', async(req,res) => {
 });
 
 
-router.put('/unlike/:id', auth, async(req,res) => {
+router.put('/like/:id', auth, async(req, res) => {
+    const id= req.params.id;
     try {
-        const post = await Post.findById(req.params.id);
+        const video = await Video.find({IdVideo: id});
         //Check if the post has already been liked
-        if(post.likes.filter(like => like.user.toString() === req.user.id).length === 0){
-            return res.status(400).json({msg: 'Post has not yet been liked'});
+        if(video[0].likes.filter(like => like.user.toString()=== req.user.id).length >0){
+            return res.status(400).json({msg: 'Video already like'});
         }
+        video[0].likes.unshift({user: req.user.id});
 
-        //Get remove index
-        const removeIndex = post.likes.map(like => like.user.toString()).indexOf(req.user.id);
+        await video[0].save();
 
-        post.likes.splice(removeIndex, 1);
-
-        await post.save();
-
-        res.json(post.likes);
+        res.json(video[0].likes);
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
 });
+
+router.put('/unlike/:id', auth, async(req, res) => {
+    const id= req.params.id;
+    try {
+        const video = await Video.find({IdVideo: id});
+        //Check if the post has already been liked
+        if(video[0].likes.filter(like => like.user.toString()=== req.user.id).length === 0){
+            return res.status(400).json({msg: 'Video has not yet been liked'});
+        }
+
+        const removeIndex = video[0].likes.map(like => like.user.toString()).indexOf(req.user.id);
+
+        video[0].likes.splice(removeIndex, 1);
+
+        await video[0].save();
+
+        res.json(video[0].likes);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+})
 
 router.post('/comment/:id',[auth,[
     check('text', 'Text is required').not().isEmpty()

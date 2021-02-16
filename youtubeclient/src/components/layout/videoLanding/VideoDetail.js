@@ -1,8 +1,8 @@
 import React,{Fragment} from 'react';
 import CommentItem from '../comment/CommentItem';
 import Spinner from '../Spinner';
-
-
+import {addlike, removelike} from '../../../actions/video';
+import {connect} from 'react-redux';
 const VideoDetail = ({video}) => {
     if(!video){
         return <Spinner />;
@@ -25,4 +25,6 @@ const VideoDetail = ({video}) => {
     );
 };
 
-export default VideoDetail;
+
+
+export default connect()(VideoDetail);

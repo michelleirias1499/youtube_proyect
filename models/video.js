@@ -26,6 +26,17 @@ const VideoSchema = new mongoose.Schema({
                 default: Date.now
             }
         }
+    ],
+    likes:[
+        {
+            title:{
+                type: String
+            },
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'user'
+            }
+        }
     ]
 })
 

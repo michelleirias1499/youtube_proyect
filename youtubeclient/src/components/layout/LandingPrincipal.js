@@ -38,13 +38,19 @@ class LandingPrincipal extends React.Component {
         this.setState({
             videos:response.data.items,
             selectedVideo: response.data.items[0]
-        
+            
         })
     };
 
     onVideoSelect = video => {
         this.setState({selectedVideo: video});
+        const location = {
+            pathname: '/ReproductionPage',
+            query: { video: video }
+        }
+        this.props.history.push(location)
     }
+
     render() {
         return (
             <div className="landing">

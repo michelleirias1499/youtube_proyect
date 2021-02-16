@@ -66,14 +66,18 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
             console.log("datos del comment", avatar,text,name)
             commentItems.push(
                 <div>
-                    <div>{avatar}</div>
-                    <div>{name}</div>
+                    <div className="avatar">
+                        <img className="ui avatar image" src={avatar}/>
+                        <div className="content">
+                            <div className="ui sub header">{name} says:</div>
+                        </div>
+                    </div>
                     <div>{text}</div>
                 </div>
             );
         })
         setcommentsRenders(commentItems);
-        console.log("ESTA ES LA LISTA DEE COMMENTS", commentItems)
+        
     }, [comments])
     
     const getAllComments= async(videoId)=>{
@@ -84,7 +88,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     }
     return (
         <div>
-            <div className="comment">
+            <div className="ui comments">
                 {commentsRender}
             </div>
             <form className="ui reply form" onSubmit={e=> {
