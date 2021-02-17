@@ -31,16 +31,15 @@ const VideoDetail = ({video, getVideo, match, addlike, removelike, auth}) => {
                 </h4>
                 <p>{video.snippet.description}</p>
             </div>
-            <div>
-                <button onClick={e => addlike(video.id.videoId)} type="button" className="ui red button">
+            <div className="ui buttons">
+                <button className="ui red button" onClick={e => addlike(video.id.videoId)}>
                     <i className="heart icon"></i>{''}Likes
                 </button>
+                <div className="or"></div>
+                <button className="ui blue button" onClick={e => removelike(video.id.videoId)}>
+                    <i className="thumbs down outline icon"></i>{''}Dislike
+                </button>
             </div>
-            <div>
-                <button onClick={e => removelike(video.id.videoId)} type="button" tabIndex="0" className="ui basic blue button">
-                        <i className="thumbs down outline icon"></i>{''}Dislike
-                    </button>
-                </div>
             <div className="ui comments">
                 <h3 className="ui dividing header">Comments</h3>
             </div>
