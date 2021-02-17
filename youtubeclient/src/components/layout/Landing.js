@@ -18,7 +18,7 @@ class Landing extends React.Component  {
         }else{
             this.onTermSubmit('cute kitties');
         }
-        console.log("que trae props", this.props);
+        //console.log("que trae props", this.props);
     }
 
     onTermSubmit = async (term) =>{

@@ -7,51 +7,12 @@ import {commentVideo} from '../../../actions/video';
 import SingleComment from '../comment/SingleComment';
 import axios from 'axios';
 
-// class CommentItem extends React.Component  {
-//     //state = {videos:[], selectedVideo: null};
-
-//     constructor (props) {
-//         super(props);
-//         this.state={videoId:'', comments:[]}
-//     }
-
-//     componentDidMount(){
-//         //Aqui tengo que traer los comments del video
-//         const videoId = this.props.video;
-//         this.getAllComments(videoId);
-//     }
-
-//     componentWillUpdate(){
-//         //Aqui tengo que traer los comments del video
-//         console.log("update estado", this.state.comments);
-//     }
-
-//     async getAllComments(videoId){
-//         const allcomments = await axios.get(`/api/video/${videoId}`);
-//         const commentsArray = allcomments.data||[];
-//         this.setState({comments: commentsArray});
-//         console.log("estado", this.state.comments);
-//     }
-    
-//     render() {
-//         const allComments = this.state.comments;
-//         const oneComment =[];
-//         allComments.map((comment) =>{
-
-//         })
-//     return (
-//         <div>Hola</div>
-//     )}
-// }
-
-// export default CommentItem
-
 const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
     const [comments, setcommentsArray] = useState([]);
     const [commentsRender, setcommentsRenders] = useState([]);    
 
-    console.log("test", video); 
+    //console.log("test", video); 
 
     useEffect(() => {
         getAllComments(video)
@@ -63,7 +24,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
         var commentItems = []
         nextLevelComments.map((commentInfo)=>{
             let {avatar,text,name} = commentInfo 
-            console.log("datos del comment", avatar,text,name)
+            //console.log("datos del comment", avatar,text,name)
             commentItems.push(
                 <div>
                     <div className="avatar">
@@ -84,7 +45,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
         const allcomments = await axios.get(`/api/video/${videoId}`);
         const commentsArray = allcomments.data||[];
         setcommentsArray(commentsArray);
-        console.log("coments", comments);
+        //console.log("coments", comments);
     }
     return (
         <div>

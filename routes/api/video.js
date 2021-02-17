@@ -10,13 +10,13 @@ router.post('/', [
 ],
 async (req, res) => {
     try {
-        console.log('este es el req.body', req.body);
+        //console.log('este es el req.body', req.body);
         const newVideo = new Video({
             IdVideo: req.body.video
         });
 
         const video = await newVideo.save();
-        console.log('este es el await', video);
+        //console.log('este es el await', video);
         res.json(video);
 
     } catch (error) {
@@ -66,7 +66,6 @@ router.put('/like/:id', auth, async(req, res) => {
         video[0].likes.unshift({user: req.user.id});
 
         await video[0].save();
-
         res.json(video[0].likes);
     } catch (error) {
         console.error(error.message);

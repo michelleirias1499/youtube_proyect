@@ -25,7 +25,7 @@ export const postvideo = (video) => async dispatch => {
         }
     }
     try {
-        console.log('entro!')
+        //console.log('entro!')
         const res=await axios.post('/api/video',{video}, config);
         dispatch({
             type: ADD_VIDEO,
@@ -33,7 +33,7 @@ export const postvideo = (video) => async dispatch => {
         });
        
     } catch (error) {
-        console.log('Este es el error',error);
+        //console.log('Este es el error',error);
         dispatch({
             type: VIDEO_ERROR,
             payload: {msg: error.response.statusText, status: error.response.status}
@@ -48,16 +48,16 @@ export const commentVideo = (video, formData) => async dispatch => {
         }
     }
     try {
-        console.log('entro!')
+        //console.log('entro!')
         const res=await axios.post(`/api/video/comment/${video}`,formData, config);
         dispatch({
             type: ADD_COMMENT,
             payload:res.data
         });
         dispatch(setAlert('Comment added', 'success'))
-        console.log('el es res', res);
+        //console.log('el es res', res);
     } catch (error) {
-        console.log('Este es el error',error);
+        //console.log('Este es el error',error);
         dispatch({
             type: VIDEO_ERROR,
             payload: {msg: error.response.statusText, status: error.response.status}

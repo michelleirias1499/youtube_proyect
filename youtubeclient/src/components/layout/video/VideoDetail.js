@@ -13,8 +13,8 @@ const VideoDetail = ({video, getVideo, match, addlike, removelike, auth}) => {
     useEffect(() => {
         
     },)
-    console.log("video id", video);
-    console.log("wea de likes",likesRender)
+    //console.log("video id", video);
+    //console.log("wea de likes",likesRender)
     if(!video){
         return <Spinner />;
     }
