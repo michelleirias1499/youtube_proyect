@@ -1,6 +1,6 @@
 import axios from 'axios';
 import{setAlert} from './alert';
-import{GET_VIDEO, VIDEO_ERROR, ADD_VIDEO, ADD_COMMENT, UPDATE_LIKES} from './types';
+import{GET_VIDEO, VIDEO_ERROR, ADD_VIDEO, ADD_COMMENT, UPDATE_LIKES, HANDLE_LIKE, HANDLE_DISLIKE} from './types';
 
 //Get video by id
 export const getVideo = () => async dispatch => {
@@ -47,6 +47,7 @@ export const commentVideo = (video, formData) => async dispatch => {
             'Content-Type': 'application/json'
         }
     }
+    let commentAdded = false;
     try {
         //console.log('entro!')
         const res=await axios.post(`/api/video/comment/${video}`,formData, config);
@@ -54,7 +55,8 @@ export const commentVideo = (video, formData) => async dispatch => {
             type: ADD_COMMENT,
             payload:res.data
         });
-        dispatch(setAlert('Comment added', 'success'))
+        dispatch(setAlert('Comment added', 'success'));
+        return commentAdded = true;
         //console.log('el es res', res);
     } catch (error) {
         //console.log('Este es el error',error);
@@ -63,6 +65,7 @@ export const commentVideo = (video, formData) => async dispatch => {
             payload: {msg: error.response.statusText, status: error.response.status}
         });
         dispatch(setAlert('You must have an account to comment', 'danger'));
+        return commentAdded;
     }
 };
 //add likes
@@ -70,7 +73,7 @@ export const addlike = (video) => async dispatch => {
     try {
         const res = axios.put(`/api/video/like/${video}`);
         dispatch({
-            type: UPDATE_LIKES,
+            type: {UPDATE_LIKES},
             payload: {video, likes:res.data}
         });
         dispatch(setAlert('Like added', 'success'))
@@ -87,7 +90,7 @@ export const removelike = (video) => async dispatch => {
     try {
         const res = axios.put(`/api/video/unlike/${video}`);
         dispatch({
-            type: UPDATE_LIKES,
+            type: {UPDATE_LIKES},
             payload: {video, likes:res.data}
         });
         dispatch(setAlert('Like removed', 'danger'))

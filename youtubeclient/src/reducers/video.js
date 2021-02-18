@@ -3,14 +3,19 @@ import {
     VIDEO_ERROR,
     ADD_VIDEO,
     ADD_COMMENT,
-    UPDATE_LIKES
+    UPDATE_LIKES,
+    HANDLE_LIKE,
+    HANDLE_DISLIKE
 }from '../actions/types';
 
 const initialState ={
     videos:[],
     video: null,
     loading: true,
-    error:{}
+    error:{},
+    likes: 0,
+    dislikes: 0,
+    active: null
 }
 
 export default function(state = initialState, action){
@@ -46,6 +51,20 @@ export default function(state = initialState, action){
                 ...state,
                 videos: state.videos.map(video => video === payload.id ? {...video, likes: payload.likes}: video), 
                 loading: false
+            }
+        case HANDLE_LIKE:
+            return{
+                ...state,
+                likes: state.likes + 1,
+                dislikes: state.active === "dislike" ? state.dislikes - 1 : state.dislikes,
+                active: "like"
+            }
+        case HANDLE_DISLIKE:
+            return {
+                ...state,
+                likes: state.active === "like" ? state.likes - 1 : state.likes,
+                active: "dislike",
+                dislikes: state.dislikes + 1
             }
         default: return state;
     }

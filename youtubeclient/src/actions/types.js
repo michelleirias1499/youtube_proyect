@@ -14,4 +14,6 @@ export const VIDEO_ERROR ="VIDEO_ERROR";
 export const ADD_VIDEO="ADD_VIDEO";
 export const ADD_COMMENT="ADD_COMMENT";
 export const UPDATE_LIKES="UPDATE_LIKES";
+export const HANDLE_LIKE = "HANDLE_LIKE";
+export const HANDLE_DISLIKE ="HANDLE_DISLIKE";
 

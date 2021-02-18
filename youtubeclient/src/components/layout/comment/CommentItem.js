@@ -11,12 +11,21 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
     const [comments, setcommentsArray] = useState([]);
     const [commentsRender, setcommentsRenders] = useState([]);    
-
+    const [newComment, setNewComment] = useState(false);
     //console.log("test", video); 
 
     useEffect(() => {
         getAllComments(video)
-    }, [video])
+    }, [video]);
+
+    useEffect(() => {
+        console.log("Entro afuera!")
+        if(newComment === true)
+        {
+            getAllComments(video)
+            console.log("Entro!")
+        }
+    }, [newComment]);
 
     useEffect(() => {
         var mainCommentArray = comments[0] || []
@@ -39,12 +48,14 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
         })
         setcommentsRenders(commentItems);
         
-    }, [comments])
+    }, [comments]);
+
     
     const getAllComments= async(videoId)=>{
         const allcomments = await axios.get(`/api/video/${videoId}`);
         const commentsArray = allcomments.data||[];
         setcommentsArray(commentsArray);
+        console.log("entro en allcoments", videoId, commentsArray);
         //console.log("coments", comments);
     }
     return (
@@ -55,8 +66,11 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
             <form className="ui reply form" onSubmit={e=> {
                 e.preventDefault();
                 postvideo(video);
-                commentVideo(video,{text});
+                let commentAdded = commentVideo(video,{text});
+                //commentVideo(video,{text}); 
                 setText('');
+                setNewComment(true);
+                console.log("este es comment added", commentAdded);
             }}>
                 <div className="field">
                     <textarea placeholder="Comment here" value={text} onChange={e=> setText(e.target.value)}></textarea>
