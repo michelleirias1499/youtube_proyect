@@ -11,7 +11,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
     const [comments, setcommentsArray] = useState([]);
     const [commentsRender, setcommentsRenders] = useState([]);    
-    const [newComment, setNewComment] = useState(false);
+    const [newCommentAdded, setNewComment] = useState(false);
     //console.log("test", video); 
 
     useEffect(() => {
@@ -19,13 +19,11 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     }, [video]);
 
     useEffect(() => {
-        console.log("Entro afuera!")
-        if(newComment === true)
-        {
+        if (newCommentAdded){
             getAllComments(video)
-            console.log("Entro!")
+            setNewComment(false)
         }
-    }, [newComment]);
+    }, [newCommentAdded])
 
     useEffect(() => {
         var mainCommentArray = comments[0] || []
@@ -58,6 +56,17 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
         console.log("entro en allcoments", videoId, commentsArray);
         //console.log("coments", comments);
     }
+
+    const onCommentSubmitted = async () => {
+        postvideo(video);
+        let videoComment = await commentVideo(video,{text});
+        setText('');
+        console.log("ON COMMENT SUBMITTED", videoComment)
+        if (videoComment){
+            setNewComment(true)
+        }
+    }
+
     return (
         <div>
             <div className="ui comments">
@@ -65,12 +74,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
             </div>
             <form className="ui reply form" onSubmit={e=> {
                 e.preventDefault();
-                postvideo(video);
-                let commentAdded = commentVideo(video,{text});
-                //commentVideo(video,{text}); 
-                setText('');
-                setNewComment(true);
-                console.log("este es comment added", commentAdded);
+                onCommentSubmitted();
             }}>
                 <div className="field">
                     <textarea placeholder="Comment here" value={text} onChange={e=> setText(e.target.value)}></textarea>

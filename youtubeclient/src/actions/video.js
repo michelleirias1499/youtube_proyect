@@ -56,8 +56,12 @@ export const commentVideo = (video, formData) => async dispatch => {
             payload:res.data
         });
         dispatch(setAlert('Comment added', 'success'));
-        return commentAdded = true;
-        //console.log('el es res', res);
+        console.log("este es eel res", res,res.status, res.status == 200 )
+        if (res && res.status && res.status == 200){
+            console.log("comment exitoso")
+            commentAdded = true
+        } 
+        return commentAdded
     } catch (error) {
         //console.log('Este es el error',error);
         dispatch({
