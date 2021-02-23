@@ -1,6 +1,7 @@
 import {
     GET_USER,
-    USER_ERROR
+    USER_ERROR,
+    CLEAR_PROFILE
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,12 @@ export default function(state = initialState, action){
                 error: payload,
                 loading: false
             };
+        case CLEAR_PROFILE:
+            return{
+                ...state,
+                user: null,
+                loading: false
+            }
         default:
             return state;
     }

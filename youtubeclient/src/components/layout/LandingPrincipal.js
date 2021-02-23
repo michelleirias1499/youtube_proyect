@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import youtube from '../apis/youtube';
-import SearchBar from './videoLanding/SearchBar';
-import VideoList from './videoLanding/VideoList';
+import SearchBar from './video/SearchBar';
+import VideoList from './video/VideoList';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 

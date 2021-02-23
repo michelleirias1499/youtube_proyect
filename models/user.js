@@ -21,6 +21,10 @@ const UserSquema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    description:{
+        type: String,
+        required: true
+    },
     likes:[
         {
             title:{

@@ -17,7 +17,7 @@ body {
   font-family: "Raleway", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background: #ffff;
   color: #333;
 }
 
@@ -330,10 +330,14 @@ button {
   margin-right: 0.6rem;
 }
 
+.videobox {
+  background-color: #ffff;
+}
+
 /* Landing Page */
 .landing {
   position: relative;
-  background: #fff;
+  background: white;
   height: 100vh;
 }
 

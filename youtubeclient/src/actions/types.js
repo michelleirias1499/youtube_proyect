@@ -16,4 +16,4 @@ export const ADD_COMMENT="ADD_COMMENT";
 export const UPDATE_LIKES="UPDATE_LIKES";
 export const HANDLE_LIKE = "HANDLE_LIKE";
 export const HANDLE_DISLIKE ="HANDLE_DISLIKE";
-
+export const CLEAR_PROFILE ="CLEAR_PROFILE";

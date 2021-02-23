@@ -41,11 +41,11 @@ class Landing extends React.Component  {
     
     render() {
     return (
-        <div className="landing">
-            <div className="ui container">
+        <div>
+            <div className="landing">
                 <SearchBar onFormSubmit={this.onTermSubmit}/>
                 <div className="ui grid">
-                    <div className="ui row">
+                    <div className="ui row videobox">
                         <div className="eleven wide column">
                             <VideoDetail video={this.state.selectedVideo}/>
                         </div>

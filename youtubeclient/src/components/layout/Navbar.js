@@ -12,7 +12,7 @@ export const Navbar = ({auth: {isAuthenticated, loading}, logout}) => {
             <span className="hide-sm"></span>
                 Dashboard</Link></li>
             <li>
-                <a onClick={logout} href='#!'>
+                <a onClick={logout} href='/login'>
                     <i className="fas fa-sign-out-alt"></i>{' '}
                     <span className="hide-sm"></span>Logout
                 </a>

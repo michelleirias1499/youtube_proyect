@@ -10,10 +10,11 @@ const Register = ({setAlert, register, isAuthenticated}) => {
         name:'',
         email:'',
         password: '',
-        password2: ''
+        password2: '',
+        description: ''
     });
 
-    const {name, email, password, password2} = formData;
+    const {name, email, password, password2, description} = formData;
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
     const onSubmit = async e => {
@@ -21,7 +22,7 @@ const Register = ({setAlert, register, isAuthenticated}) => {
         if(password !== password2){
             setAlert('Password do not match','danger');
         }else{
-            register({name, email, password});
+            register({name, email, password, description});
         }
     };
 
@@ -43,6 +44,12 @@ const Register = ({setAlert, register, isAuthenticated}) => {
                 <small className="form-text">
                     This site uses Gravatar so if you want a profile image, use a
                     Gravatar email
+                </small>
+                </div>
+                <div className="form-group">
+                <input type="text" placeholder="Description" name="description" value={description} onChange={e => onChange(e)}  />
+                <small className="form-text">
+                    Leave a little description about yourself
                 </small>
                 </div>
                 <div className="form-group">

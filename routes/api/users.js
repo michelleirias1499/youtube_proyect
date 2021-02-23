@@ -12,14 +12,15 @@ const express = require('express');
  router.post('/', [
      check('name', 'Name is required').not().isEmpty(),
      check('email', 'Please include a valid email').isEmail(),
-     check('password', 'Please enter a password with 6 or more characters').isLength({min: 6})
+     check('password', 'Please enter a password with 6 or more characters').isLength({min: 6}),
+     check('description', 'A little description is required').not().isEmpty(),
  ], async(req, res) => {
     const errors =  validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {name, email, password} = req.body;
+    const {name, email, password, description} = req.body;
 
     try {
         let user = await User.findOne({email});
@@ -38,7 +39,8 @@ const express = require('express');
             name,
             email, 
             avatar,
-            password
+            password,
+            description
         });
 
         const salt = await bcrypt.genSalt(10);
