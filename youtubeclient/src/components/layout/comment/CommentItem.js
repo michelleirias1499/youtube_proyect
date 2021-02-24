@@ -6,6 +6,7 @@ import { stringify } from 'uuid';
 import {commentVideo} from '../../../actions/video';
 import SingleComment from '../comment/SingleComment';
 import axios from 'axios';
+import './comments.css';
 
 const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
     const [text, setText] = useState('');
@@ -33,7 +34,7 @@ const CommentItem = ({postvideo, video, commentVideo, videoId}) => {
             let {avatar,text,name} = commentInfo 
             //console.log("datos del comment", avatar,text,name)
             commentItems.push(
-                <div>
+                <div className="coment-box">
                     <div className="avatar">
                         <img className="ui avatar image" src={avatar}/>
                         <div className="content">

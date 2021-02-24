@@ -1,0 +1,23 @@
+.VideosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  background: #ffffffe3;
+  justify-content: space-evenly;
+}
+
+.video-segment {
+  display: flex;
+}
+
+.video-title {
+  font-size: 12px;
+  font-weight: bolder;
+  font-family: revert;
+  text-align: inherit;
+  margin-left: 5px;
+}
+
+.ui.grid {
+  background: #ffffffe0;
+  margin: 0px;
+}

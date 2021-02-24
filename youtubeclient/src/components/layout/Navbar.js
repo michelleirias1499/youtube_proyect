@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout} from '../../actions/auth';
+import iconyoutube from '../../img/iconyoutube.svg'
 
 export const Navbar = ({auth: {isAuthenticated, loading}, logout}) => {
     const authLinks =(

@@ -3,10 +3,11 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import SearchBar from './video/SearchBar';
-import youtube from '../apis/youtube';
+import youtube from '../apis/youtube2';
 import VideoList from './video/VideoList';
 import VideoDetail from './video/VideoDetail';
 import CommentItem from './comment/CommentItem';
+import './videoLanding/Recomendvideos.css';
 
 class Landing extends React.Component  {
     state = {videos:[], selectedVideo: null};
@@ -45,7 +46,7 @@ class Landing extends React.Component  {
             <div className="landing">
                 <SearchBar onFormSubmit={this.onTermSubmit}/>
                 <div className="ui grid">
-                    <div className="ui row videobox">
+                    <div className="ui row">
                         <div className="eleven wide column">
                             <VideoDetail video={this.state.selectedVideo}/>
                         </div>

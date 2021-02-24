@@ -17,7 +17,7 @@ body {
   font-family: "Raleway", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background: #ffff;
+  background-image: url("./img/mandala.jpg");
   color: #333;
 }
 
@@ -40,7 +40,7 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: 3rem;
 }
 
@@ -337,7 +337,7 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
-  background: white;
+  background-image: url("./img/mandala.jpg");
   height: 100vh;
 }
 

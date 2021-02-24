@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VideoItem from './VideoItem';
+import './Recomendvideos.css'
 
 const VideoList = ({videos, onVideoSelect}) => {
     const renderedList= videos.map(video => {
@@ -7,7 +8,7 @@ const VideoList = ({videos, onVideoSelect}) => {
     });
 
     //props.videos
-    return <div className="ui relaxed horizontal list">{renderedList}</div>
+    return (<div className="VideosGrid">{renderedList}</div>)
 }
 
 export default VideoList;

@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import {getVideo} from '../../../actions/video';
 import {addlike, removelike} from '../../../actions/video';
 import axios from 'axios';
+import './video.css';
+import '../comment/comments.css'
 
 const HANDLE_LIKE = Symbol("HANDLE_LIKE");
 const HANDLE_DISLIKE = Symbol("HANDLE_DISLIKE");
@@ -59,7 +61,7 @@ const VideoDetail = ({video, getVideo, match, addlike, removelike, auth}) => {
     const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
 
     return(
-        <div>
+        <div className="video-box">
             <div className="ui embed">
                 <iframe title="video player" src={videoSrc}/>
             </div>
@@ -78,10 +80,11 @@ const VideoDetail = ({video, getVideo, match, addlike, removelike, auth}) => {
                     <i className="thumbs down outline icon"></i>{dislikes}Dislike
                 </button>
             </div>
-            <div className="ui comments">
+            <div className="ui comments coment-form">
                 <h3 className="ui dividing header">Comments</h3>
+                <CommentItem video={video.id.videoId} />
             </div>
-            <CommentItem video={video.id.videoId} />
+            
         </div>
         
     );

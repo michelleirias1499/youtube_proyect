@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import youtube from '../apis/youtube';
-import SearchBar from './video/SearchBar';
-import VideoList from './video/VideoList';
+import SearchBar from './videoLanding/SearchBar';
+import VideoList from './videoLanding/VideoList';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import '../layout/videoLanding/Recomendvideos.css';
 
 class LandingPrincipal extends React.Component {
     state = {videos:[], selectedVideo: null};
@@ -56,9 +57,9 @@ class LandingPrincipal extends React.Component {
             <div className="landing">
                 <div className="ui container">
                     <SearchBar onFormSubmit={this.onTermSubmit}/>
-                    <div className="ui grid">
-                        <div className="ui column">
-                            <div className="ui horizontal segment">
+                    <div className="">
+                        <div className="">
+                            <div className="">
                                 <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos}/>
                             </div>
                         </div>

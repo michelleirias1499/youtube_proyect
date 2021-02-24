@@ -25,27 +25,29 @@ const Login = ({login, isAuthenticated}) => {
 
     return (
         <Fragment>
-            <h1 className="large text-primary">Sign In</h1>
-            <p className="lead"><i className="fas fa-user"></i> 
-                Sing into your account to try take the world</p>
-            <form className="form" onSubmit={e => onSubmit(e)}>
-                <div className="form-group">
-                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e)}/>
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        minLength="6"
-                        value={password} onChange={e => onChange(e)}
-                    />
-                </div>
-                <input type="submit" className="btn btn-primary" value="Login" />
-            </form>
-            <p className="my-1">
-                Still not join our empire? <Link to="/register">Sign Up here</Link>
-            </p>
+            <div className="login-container">
+                <h1 className="large text-primary">Sign In</h1>
+                <p className="lead"><i className="fas fa-user"></i> 
+                    Sing into your account to try take the world</p>
+                <form className="form" onSubmit={e => onSubmit(e)}>
+                    <div className="form-group">
+                        <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e)}/>
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            minLength="6"
+                            value={password} onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <input type="submit" className="btn btn-primary" value="Login" />
+                </form>
+                <p className="my-1">
+                    Still not join our empire? <Link to="/register">Sign Up here</Link>
+                </p>
+            </div>
         </Fragment>
     );
 };
