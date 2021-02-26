@@ -1,0 +1,4 @@
+.ui.segment:last-child {
+  margin-bottom: 0;
+  margin-top: 25px;
+}

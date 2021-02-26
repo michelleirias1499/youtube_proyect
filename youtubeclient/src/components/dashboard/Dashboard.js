@@ -4,6 +4,7 @@ import Spinner from '../layout/Spinner';
 import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../actions/user';
 import catcult from '../../img/profilecat.png';
+import './dashboard.css';
 
 const Dashboard = ({getCurrentProfile, auth:{user}, user:{loading}}) => {
     useEffect(() => {
